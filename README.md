@@ -1,2 +1,2 @@
 # dotfiles
-Schizo setup
+Schizo setup. This is all relative to the home directory

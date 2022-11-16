@@ -1,0 +1,11 @@
+[hostname]
+format = "[$hostname]($style): "
+ssh_only = false
+style = "bold"
+
+[username]
+format = "[$user]($style) @ "
+show_always = true
+
+[status]
+disabled = false

@@ -1,0 +1,512 @@
+<?xml version="1.0"?>
+
+<!--
+  This file contains all supported config elements & attributes with
+  default values.
+-->
+
+<labwc_config>
+
+  <core>
+    <decoration>server</decoration>
+    <gap>0</gap>
+    <adaptiveSync>no</adaptiveSync>
+    <cycleViewPreview>no</cycleViewPreview>
+    <cycleViewOutlines>yes</cycleViewOutlines>
+  </core>
+
+  <!-- <font><theme> can be defined without an attribute to set all places -->
+  <theme>
+    <name>Material-Black-Blueberry-4.0</name>
+    <font place="ActiveWindow">
+      <name>Roboto</name>
+      <size>13.5</size>
+      <slant>normal</slant>
+      <weight>normal</weight>
+    </font>
+    <font place="MenuItem">
+      <name>Roboto</name>
+      <size>13.5</size>
+      <slant>normal</slant>
+      <weight>normal</weight>
+    </font>
+    <font place="OnScreenDisplay">
+      <name>Roboto</name>
+      <size>13.5</size>
+      <slant>normal</slant>
+      <weight>normal</weight>
+    </font>
+  </theme>
+
+  <!-- edge strength is in pixels -->
+  <resistance>
+    <screenEdgeStrength>20</screenEdgeStrength>
+  </resistance>
+
+  <focus>
+    <followMouse>no</followMouse>
+    <raiseOnFocus>no</raiseOnFocus>
+  </focus>
+
+  <!-- Set range to 0 to disable window snapping completely -->
+  <snapping>
+    <range>1</range>
+    <topMaximize>yes</topMaximize>
+  </snapping>
+
+  <!--
+    Use GoToDesktop left | right to switch workspaces.
+    Use SendToDesktop left | right to move windows.
+    See man labwc-actions for futher information.
+
+    Workspaces can be configured like this:
+    <desktops>
+      <popupTime>1000</popupTime>
+      <names>
+        <name>Workspace 1</name>
+        <name>Workspace 2</name>
+        <name>Workspace 3</name>
+      </names>
+    </desktops>
+  -->
+  <desktops>
+    <!--
+      popupTime defaults to 1000 so could be left out.
+      Set to 0 to completely disable the workspace OSD.
+    -->
+    <popupTime>1000</popupTime>
+    <names>
+      <name>Default</name>
+    </names>
+  </desktops>
+
+  <!--
+    Keybind actions are specified in labwc-actions(5)
+    The following keybind modifiers are supported:
+      W - window/super/logo
+      A - alt
+      C - ctrl
+      S - shift
+
+    Use <keyboard><default /> to load all the default keybinds (those listed
+    below). If the default keybinds are largely what you want, a sensible
+    approach could be to start the <keyboard> section with a <default />
+    element, and then (re-)define any special binds you need such as launching
+    your favourite terminal or application launcher.
+  -->
+  <keyboard>
+    <repeatRate>25</repeatRate>
+    <repeatDelay>600</repeatDelay>
+    <keybind key="A-Tab">
+      <action name="NextWindow" />
+    </keybind>
+    <keybind key="W-Return">
+      <action name="Execute"><command>alacritty</command></action>
+    </keybind>
+    <keybind key="A-F3">
+      <action name="Execute"><command>bemenu-run</command></action>
+    </keybind>
+    <keybind key="A-F4">
+      <action name="Close" />
+    </keybind>
+    <keybind key="W-a">
+      <action name="ToggleMaximize" />
+    </keybind>
+    <keybind key="A-Left">
+      <action name="MoveToEdge"><direction>left</direction></action>
+    </keybind>
+    <keybind key="A-Right">
+      <action name="MoveToEdge"><direction>right</direction></action>
+    </keybind>
+    <keybind key="A-Up">
+      <action name="MoveToEdge"><direction>up</direction></action>
+    </keybind>
+    <keybind key="A-Down">
+      <action name="MoveToEdge"><direction>down</direction></action>
+    </keybind>
+    <keybind key="W-Left">
+      <action name="SnapToEdge"><direction>left</direction></action>
+    </keybind>
+    <keybind key="W-Right">
+      <action name="SnapToEdge"><direction>right</direction></action>
+    </keybind>
+    <keybind key="W-Up">
+      <action name="SnapToEdge"><direction>up</direction></action>
+    </keybind>
+    <keybind key="W-Down">
+      <action name="SnapToEdge"><direction>down</direction></action>
+    </keybind>
+    <keybind key="A-Space">
+      <action name="ShowMenu"><menu>client-menu</menu></action>
+    </keybind>
+    <keybind key="XF86AudioLowerVolume">
+      <action name="Execute"><command>pactl set-sink-volume @DEFAULT_SINK@ -1000</command></action>
+    </keybind>
+    <keybind key="XF86AudioRaiseVolume">
+      <action name="Execute"><command>pactl set-sink-volume @DEFAULT_SINK@ +1000</command></action>
+    </keybind>
+    <keybind key="XF86AudioMute">
+      <action name="Execute"><command>pactl set-sink-mute @DEFAULT_SINK@ toggle</command></action>
+    </keybind>
+    <keybind key="XF86AudioMicMute">
+      <action name="Execute"><command>pactl set-source-mute @DEFAULT_SOURCE@ toggle</command></action>
+    </keybind>
+    <keybind key="XF86MonBrightnessUp">
+      <action name="Execute"><command>xbacklight -inc 5</command></action>
+    </keybind>
+    <keybind key="XF86MonBrightnessDown">
+      <action name="Execute"><command>xbacklight -dec 5</command></action>
+    </keybind>
+    <keybind key="Print">
+      <action name="Execute">
+        <command>ksnip -r</command>
+      </action>
+    </keybind>
+    <keybind key="S-Print">
+      <action name="Execute">
+        <command>ksnip -m</command>
+      </action>
+    </keybind>
+    <keybind key="A-Print">
+      <action name="Execute">
+        <command>ksnip -a</command>
+      </action>
+    </keybind>
+    <keybind key="Super_L">
+      <action name="Execute">
+        <command>~/.local/bin/launcher.sh</command>
+      </action>
+    </keybind>
+  </keyboard>
+
+    <mouse>
+    <dragThreshold>1</dragThreshold>
+    <!-- number of pixels the mouse must move before a drag begins -->
+    <doubleClickTime>500</doubleClickTime>
+    <!-- in milliseconds (1000 = 1 second) -->
+    <screenEdgeWarpTime>400</screenEdgeWarpTime>
+    <!-- Time before changing desktops when the pointer touches the edge of the
+       screen while moving a window, in milliseconds (1000 = 1 second).
+       Set this to 0 to disable warping -->
+    <screenEdgeWarpMouse>false</screenEdgeWarpMouse>
+    <!-- Set this to TRUE to move the mouse pointer across the desktop when
+       switching due to hitting the edge of the screen -->
+    <context name="Frame">
+      <mousebind button="A-Left" action="Press">
+        <action name="Focus"/>
+        <action name="Raise"/>
+      </mousebind>
+      <mousebind button="A-Left" action="Drag">
+        <action name="Move"/>
+      </mousebind>
+      <mousebind button="A-Right" action="Press">
+        <action name="Focus"/>
+        <action name="Raise"/>
+      </mousebind>
+      <mousebind button="A-Right" action="Drag">
+        <action name="Resize"/>
+      </mousebind>
+      <mousebind button="A-Middle" action="Press">
+        <action name="Lower"/>
+        <action name="FocusToBottom"/>
+        <action name="Unfocus"/>
+      </mousebind>
+      <mousebind button="A-Up" action="Click">
+        <action name="GoToDesktop">
+          <to>previous</to>
+        </action>
+      </mousebind>
+      <mousebind button="A-Down" action="Click">
+        <action name="GoToDesktop">
+          <to>next</to>
+        </action>
+      </mousebind>
+      <mousebind button="C-A-Up" action="Click">
+        <action name="GoToDesktop">
+          <to>previous</to>
+        </action>
+      </mousebind>
+      <mousebind button="C-A-Down" action="Click">
+        <action name="GoToDesktop">
+          <to>next</to>
+        </action>
+      </mousebind>
+      <mousebind button="A-S-Up" action="Click">
+        <action name="SendToDesktop">
+          <to>previous</to>
+        </action>
+      </mousebind>
+      <mousebind button="A-S-Down" action="Click">
+        <action name="SendToDesktop">
+          <to>next</to>
+        </action>
+      </mousebind>
+    </context>
+    <context name="Titlebar">
+      <mousebind button="Left" action="Drag">
+        <action name="Move"/>
+      </mousebind>
+      <mousebind button="Left" action="DoubleClick">
+        <action name="ToggleMaximize"/>
+      </mousebind>
+    </context>
+    <context name="Titlebar Top Right Bottom Left TLCorner TRCorner BRCorner BLCorner">
+      <mousebind button="Left" action="Press">
+        <action name="Focus"/>
+        <action name="Raise"/>
+      </mousebind>
+      <mousebind button="Middle" action="Press">
+        <action name="Lower"/>
+        <action name="FocusToBottom"/>
+        <action name="Unfocus"/>
+      </mousebind>
+      <mousebind button="Right" action="Press">
+        <action name="Focus"/>
+        <action name="Raise"/>
+        <action name="ShowMenu">
+          <menu>client-menu</menu>
+        </action>
+      </mousebind>
+    </context>
+    <context name="Top">
+      <mousebind button="Left" action="Drag">
+        <action name="Resize">
+          <edge>top</edge>
+        </action>
+      </mousebind>
+    </context>
+    <context name="Left">
+      <mousebind button="Left" action="Drag">
+        <action name="Resize">
+          <edge>left</edge>
+        </action>
+      </mousebind>
+    </context>
+    <context name="Right">
+      <mousebind button="Left" action="Drag">
+        <action name="Resize">
+          <edge>right</edge>
+        </action>
+      </mousebind>
+    </context>
+    <context name="Bottom">
+      <mousebind button="Left" action="Drag">
+        <action name="Resize">
+          <edge>bottom</edge>
+        </action>
+      </mousebind>
+      <mousebind button="Right" action="Press">
+        <action name="Focus"/>
+        <action name="Raise"/>
+        <action name="ShowMenu">
+          <menu>client-menu</menu>
+        </action>
+      </mousebind>
+    </context>
+    <context name="TRCorner BRCorner TLCorner BLCorner">
+      <mousebind button="Left" action="Press">
+        <action name="Focus"/>
+        <action name="Raise"/>
+      </mousebind>
+      <mousebind button="Left" action="Drag">
+        <action name="Resize"/>
+      </mousebind>
+    </context>
+    <context name="Client">
+      <mousebind button="Left" action="Press">
+        <action name="Focus"/>
+        <action name="Raise"/>
+      </mousebind>
+      <mousebind button="Middle" action="Press">
+        <action name="Focus"/>
+        <action name="Raise"/>
+      </mousebind>
+      <mousebind button="Right" action="Press">
+        <action name="Focus"/>
+        <action name="Raise"/>
+      </mousebind>
+    </context>
+    <context name="Icon">
+      <mousebind button="Left" action="Press">
+        <action name="Focus"/>
+        <action name="Raise"/>
+        <action name="ShowMenu">
+          <menu>client-menu</menu>
+        </action>
+      </mousebind>
+      <mousebind button="Right" action="Press">
+        <action name="Focus"/>
+        <action name="Raise"/>
+        <action name="ShowMenu">
+          <menu>client-menu</menu>
+        </action>
+      </mousebind>
+    </context>
+    <context name="AllDesktops">
+      <mousebind button="Left" action="Press">
+        <action name="Focus"/>
+        <action name="Raise"/>
+      </mousebind>
+      <mousebind button="Left" action="Click">
+        <action name="ToggleOmnipresent"/>
+      </mousebind>
+    </context>
+    <context name="Shade">
+      <mousebind button="Left" action="Press">
+        <action name="Focus"/>
+        <action name="Raise"/>
+      </mousebind>
+      <mousebind button="Left" action="Click">
+        <action name="ToggleShade"/>
+      </mousebind>
+    </context>
+    <context name="Iconify">
+      <mousebind button="Left" action="Press">
+        <action name="Focus"/>
+        <action name="Raise"/>
+      </mousebind>
+      <mousebind button="Left" action="Click">
+        <action name="Iconify"/>
+      </mousebind>
+    </context>
+    <context name="Maximize">
+      <mousebind button="Left" action="Press">
+        <action name="Focus"/>
+        <action name="Raise"/>
+      </mousebind>
+      <mousebind button="Middle" action="Press">
+        <action name="Focus"/>
+        <action name="Raise"/>
+      </mousebind>
+      <mousebind button="Right" action="Press">
+        <action name="Focus"/>
+        <action name="Raise"/>
+      </mousebind>
+      <mousebind button="Left" action="Click">
+        <action name="ToggleMaximize"/>
+      </mousebind>
+      <mousebind button="Middle" action="Click">
+        <action name="ToggleMaximize">
+          <direction>vertical</direction>
+        </action>
+      </mousebind>
+      <mousebind button="Right" action="Click">
+        <action name="ToggleMaximize">
+          <direction>horizontal</direction>
+        </action>
+      </mousebind>
+    </context>
+    <context name="Close">
+      <mousebind button="Left" action="Press">
+        <action name="Focus"/>
+        <action name="Raise"/>
+      </mousebind>
+      <mousebind button="Left" action="Click">
+        <action name="Close"/>
+      </mousebind>
+    </context>
+    <context name="Desktop">
+      <mousebind button="Up" action="Click">
+        <action name="GoToDesktop">
+          <to>previous</to>
+        </action>
+      </mousebind>
+      <mousebind button="Down" action="Click">
+        <action name="GoToDesktop">
+          <to>next</to>
+        </action>
+      </mousebind>
+      <mousebind button="A-Up" action="Click">
+        <action name="GoToDesktop">
+          <to>previous</to>
+        </action>
+      </mousebind>
+      <mousebind button="A-Down" action="Click">
+        <action name="GoToDesktop">
+          <to>next</to>
+        </action>
+      </mousebind>
+      <mousebind button="C-A-Up" action="Click">
+        <action name="GoToDesktop">
+          <to>previous</to>
+        </action>
+      </mousebind>
+      <mousebind button="C-A-Down" action="Click">
+        <action name="GoToDesktop">
+          <to>next</to>
+        </action>
+      </mousebind>
+      <mousebind button="Left" action="Press">
+        <action name="Focus"/>
+        <action name="Raise"/>
+      </mousebind>
+      <mousebind button="Right" action="Press">
+        <action name="Focus"/>
+        <action name="Raise"/>
+      </mousebind>
+    </context>
+    <context name="Root">
+      <!-- Menus -->
+      <mousebind button="Middle" action="Press">
+        <action name="ShowMenu">
+          <menu>client-list-combined-menu</menu>
+        </action>
+      </mousebind>
+      <mousebind button="Right" action="Press">
+        <action name="ShowMenu">
+          <menu>root-menu</menu>
+        </action>
+      </mousebind>
+    </context>
+    <context name="MoveResize">
+      <mousebind button="Up" action="Click">
+        <action name="GoToDesktop">
+          <to>previous</to>
+        </action>
+      </mousebind>
+      <mousebind button="Down" action="Click">
+        <action name="GoToDesktop">
+          <to>next</to>
+        </action>
+      </mousebind>
+      <mousebind button="A-Up" action="Click">
+        <action name="GoToDesktop">
+          <to>previous</to>
+        </action>
+      </mousebind>
+      <mousebind button="A-Down" action="Click">
+        <action name="GoToDesktop">
+          <to>next</to>
+        </action>
+      </mousebind>
+    </context>
+  </mouse>
+
+  <!--
+    The *category* element can be set to touch, non-touch, default or the name
+    of a device. You can obtain device names by running *libinput list-devices*
+    as root or member of the input group.
+
+    Tap is set to *yes* be default. All others are left blank in order to use
+    device defaults.
+
+    All values are [yes|no] except for:
+      - pointerSpeed [-1.0 to 1.0]
+      - accelProfile [flat|adaptive]
+      - tapButtonMap [lrm|lmr]
+  -->
+  <libinput>
+    <device category="Synaptics TM3053-006">
+      <naturalScroll></naturalScroll>
+      <leftHanded></leftHanded>
+      <pointerSpeed></pointerSpeed>
+      <accelProfile></accelProfile>
+      <tap>no</tap>
+      <tapButtonMap></tapButtonMap>
+      <middleEmulation></middleEmulation>
+      <disableWhileTyping>no</disableWhileTyping>
+    </device>
+</libinput>
+
+</labwc_config>
+

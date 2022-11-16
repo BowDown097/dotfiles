@@ -1,0 +1,23 @@
+"pactl set-sink-mute @DEFAULT_SINK@ toggle"
+    XF86AudioMute
+
+"pactl set-sink-volume @DEFAULT_SINK@ -1000"
+    XF86AudioLowerVolume
+
+"pactl set-sink-volume @DEFAULT_SINK@ +1000"
+    XF86AudioRaiseVolume
+
+"pactl set-source-mute @DEFAULT_SOURCE@ toggle"
+    XF86AudioMicMute
+
+"xbacklight -dec 5"
+    XF86MonBrightnessDown
+
+"xbacklight -inc 5"
+    XF86MonBrightnessUp
+
+"lxappearance"
+    XF86Tools
+
+"pcmanfm-qt menu://applications/"
+    XF86Explorer
